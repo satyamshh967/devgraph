@@ -4,12 +4,12 @@ import { GraphService } from '../services/graphService.js';
 export class GithubController {
   static async importProfile(req, res) {
     try {
-      const { username } = req.body;
+      const { username, token } = req.body;
       if (!username) {
-        return res.status(400).json({ error: 'GitHub username or benchmark ID is required.' });
+        return res.status(400).json({ error: 'GitHub username is required.' });
       }
 
-      const result = await GithubService.importDeveloper(username);
+      const result = await GithubService.importDeveloper(username, token);
       res.json(result);
     } catch (err) {
       console.error('Error in importProfile:', err);

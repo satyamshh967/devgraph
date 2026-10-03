@@ -8,17 +8,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        graph: {
-          bg: '#0b0f19',
-          card: '#111827',
-          border: '#1f293d',
-          gold: '#f59e0b',
-          blue: '#3b82f6',
-          emerald: '#10b981',
-          purple: '#8b5cf6',
-          cyan: '#06b6d4',
-          pink: '#ec4899',
-          rose: '#f43f5e'
+        gh: {
+          canvas: '#0d1117',
+          subtle: '#161b22',
+          header: '#010409',
+          border: '#30363d',
+          'border-subtle': '#21262d',
+          text: '#f0f6fc',
+          muted: '#8b949e',
+          link: '#58a6ff',
+          green: '#238636',
+          'green-hover': '#2ea043',
+          'green-bright': '#3fb950',
+          purple: '#8957e5',
+          gold: '#d29922',
+          red: '#f85149'
         }
       }
     },

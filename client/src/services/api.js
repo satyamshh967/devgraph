@@ -62,8 +62,8 @@ export const GraphAPI = {
     return res.data;
   },
 
-  importProfile: async (username) => {
-    const res = await api.post('/github/import', { username });
+  importProfile: async (username, token = null) => {
+    const res = await api.post('/github/import', { username, token });
     return res.data;
   },
 
