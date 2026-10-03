@@ -1,0 +1,22 @@
+{
+  "name": "developer-knowledge-graph-platform",
+  "version": "1.0.0",
+  "description": "Interactive Knowledge Graph Platform analyzing developer capability, skill evolution, and repo complexity",
+  "scripts": {
+    "nlp": ".\\.venv\\Scripts\\python.exe -m uvicorn main:app --app-dir nlp-service/app --port 8000",
+    "server": "node server/src/index.js",
+    "client": "npm.cmd --prefix client run dev",
+    "build:client": "npm.cmd --prefix client run build"
+  },
+  "keywords": [
+    "knowledge-graph",
+    "developer-analytics",
+    "neo4j",
+    "nlp",
+    "skill-extraction",
+    "team-compatibility",
+    "repo-complexity"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}
