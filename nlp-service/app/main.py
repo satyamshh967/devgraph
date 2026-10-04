@@ -46,7 +46,9 @@ class CompatibilityRequest(BaseModel):
     candidate_skills: List[Dict[str, Any]]
     target_requirements: Dict[str, Any]
 
+@app.get("/")
 @app.get("/health")
+@app.get("/api/health")
 def health_check():
     return {
         "status": "healthy",

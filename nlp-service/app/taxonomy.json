@@ -9,9 +9,9 @@
         "Next.js": { "aliases": ["nextjs", "next.js", "ssr"], "weight": 1.2, "level_threshold": 3 },
         "Vue.js": { "aliases": ["vue", "vuejs", "vue3", "pinia"], "weight": 1.0, "level_threshold": 3 },
         "Tailwind CSS": { "aliases": ["tailwindcss", "tailwind"], "weight": 0.8, "level_threshold": 2 },
-        "Redux": { "aliases": ["redux-toolkit", "rtk", "vuex"], "weight": 1.0, "level_threshold": 3 },
+        "Redux": { "aliases": ["redux-toolkit", "rtk", "vuex", "zustand"], "weight": 1.0, "level_threshold": 3 },
         "GraphQL": { "aliases": ["apollo-client", "relay"], "weight": 1.1, "level_threshold": 3 },
-        "HTML/CSS": { "aliases": ["html5", "css3", "sass", "scss"], "weight": 0.7, "level_threshold": 2 },
+        "HTML/CSS": { "aliases": ["html5", "css3", "sass", "scss", "html"], "weight": 0.7, "level_threshold": 2 },
         "Vite": { "aliases": ["vitejs", "webpack", "rollup"], "weight": 0.9, "level_threshold": 2 }
       }
     },
@@ -19,14 +19,14 @@
       "color": "#10b981",
       "skills": {
         "Node.js": { "aliases": ["nodejs", "node", "npm"], "weight": 1.0, "level_threshold": 3 },
-        "Express": { "aliases": ["expressjs", "express.js"], "weight": 0.9, "level_threshold": 2 },
+        "Express": { "aliases": ["expressjs", "express.js", "express"], "weight": 0.9, "level_threshold": 2 },
         "Python": { "aliases": ["python3", "py"], "weight": 1.0, "level_threshold": 3 },
-        "FastAPI": { "aliases": ["fastapi", "starlette", "pydantic"], "weight": 1.2, "level_threshold": 3 },
+        "FastAPI": { "aliases": ["fastapi", "starlette", "pydantic", "uvicorn"], "weight": 1.2, "level_threshold": 3 },
         "Django": { "aliases": ["django-rest-framework", "drf"], "weight": 1.1, "level_threshold": 3 },
         "Java": { "aliases": ["jdk", "openjdk", "jvm"], "weight": 1.0, "level_threshold": 3 },
         "Spring Boot": { "aliases": ["springboot", "spring-framework", "spring"], "weight": 1.3, "level_threshold": 4 },
-        "Go": { "aliases": ["golang", "goroutine"], "weight": 1.2, "level_threshold": 3 },
-        "REST API": { "aliases": ["restful", "api-design", "openapi", "swagger"], "weight": 0.8, "level_threshold": 2 },
+        "Go": { "aliases": ["golang", "goroutine", "gin"], "weight": 1.2, "level_threshold": 3 },
+        "REST API": { "aliases": ["restful", "api-design", "openapi", "swagger", "swagger-ui-express", "swagger-jsdoc"], "weight": 0.8, "level_threshold": 2 },
         "Microservices": { "aliases": ["microservice", "service-mesh", "grpc"], "weight": 1.4, "level_threshold": 4 },
         "Rust": { "aliases": ["rustlang", "cargo", "tokio"], "weight": 1.4, "level_threshold": 4 }
       }
@@ -34,12 +34,12 @@
     "Database": {
       "color": "#f59e0b",
       "skills": {
-        "Neo4j": { "aliases": ["cypher", "graph-database", "graphdb"], "weight": 1.4, "level_threshold": 3 },
-        "PostgreSQL": { "aliases": ["postgres", "psql", "pg"], "weight": 1.1, "level_threshold": 3 },
-        "MongoDB": { "aliases": ["mongo", "mongoose"], "weight": 0.9, "level_threshold": 2 },
+        "Neo4j": { "aliases": ["cypher", "graph-database", "graphdb", "neo4j-driver"], "weight": 1.4, "level_threshold": 3 },
+        "PostgreSQL": { "aliases": ["postgres", "psql", "pg", "psycopg", "psycopg2", "psycopg-binary"], "weight": 1.1, "level_threshold": 3 },
+        "MongoDB": { "aliases": ["mongo", "mongoose", "mongodb"], "weight": 1.0, "level_threshold": 2 },
         "Redis": { "aliases": ["ioredis", "caching", "in-memory"], "weight": 1.1, "level_threshold": 3 },
-        "SQL": { "aliases": ["mysql", "sqlite", "relational-database"], "weight": 0.8, "level_threshold": 2 },
-        "Prisma": { "aliases": ["typeorm", "sequelize", "sqlalchemy", "hibernate"], "weight": 0.9, "level_threshold": 2 },
+        "SQL": { "aliases": ["mysql", "sqlite", "relational-database", "sqlalchemy"], "weight": 0.9, "level_threshold": 2 },
+        "Prisma": { "aliases": ["typeorm", "sequelize", "hibernate"], "weight": 0.9, "level_threshold": 2 },
         "Elasticsearch": { "aliases": ["elastic", "opensearch", "lucene"], "weight": 1.3, "level_threshold": 3 }
       }
     },
@@ -47,23 +47,23 @@
       "color": "#06b6d4",
       "skills": {
         "Docker": { "aliases": ["containerization", "dockerfile", "docker-compose"], "weight": 1.1, "level_threshold": 3 },
-        "Kubernetes": { "aliases": ["k8s", "helm", "kubectl"], "weight": 1.5, "level_threshold": 4 },
+        "Kubernetes": { "aliases": ["k8s", "helm", "kubectl", "kubernetes"], "weight": 1.5, "level_threshold": 4 },
         "AWS": { "aliases": ["amazon-web-services", "s3", "ec2", "lambda", "cloudformation"], "weight": 1.3, "level_threshold": 3 },
-        "CI/CD": { "aliases": ["github-actions", "jenkins", "gitlab-ci", "workflows"], "weight": 1.1, "level_threshold": 3 },
+        "CI/CD": { "aliases": ["github-actions", "jenkins", "gitlab-ci", "workflows", "render", "vercel"], "weight": 1.1, "level_threshold": 3 },
         "Terraform": { "aliases": ["iac", "infrastructure-as-code", "opentofu"], "weight": 1.4, "level_threshold": 3 },
         "Linux": { "aliases": ["bash", "shell", "unix"], "weight": 0.9, "level_threshold": 2 },
-        "Monitoring": { "aliases": ["prometheus", "grafana", "opentelemetry", "datadog"], "weight": 1.2, "level_threshold": 3 }
+        "Monitoring": { "aliases": ["prometheus", "grafana", "opentelemetry", "datadog", "opentelemetry-api"], "weight": 1.2, "level_threshold": 3 }
       }
     },
     "AI & Data": {
       "color": "#ec4899",
       "skills": {
         "Machine Learning": { "aliases": ["ml", "scikit-learn", "sklearn"], "weight": 1.2, "level_threshold": 3 },
-        "Deep Learning": { "aliases": ["pytorch", "tensorflow", "keras"], "weight": 1.4, "level_threshold": 4 },
-        "NLP": { "aliases": ["natural-language-processing", "spacy", "nltk", "transformers", "huggingface", "bert"], "weight": 1.5, "level_threshold": 4 },
+        "Deep Learning": { "aliases": ["pytorch", "torch", "tensorflow", "keras"], "weight": 1.4, "level_threshold": 4 },
+        "NLP": { "aliases": ["natural-language-processing", "spacy", "nltk", "transformers", "huggingface", "bert", "sentence-transformers"], "weight": 1.5, "level_threshold": 4 },
         "LLM Engineering": { "aliases": ["langchain", "llamaindex", "openai", "rag", "vector-db", "chromadb", "embeddings"], "weight": 1.5, "level_threshold": 4 },
-        "Data Engineering": { "aliases": ["spark", "airflow", "kafka", "pandas", "numpy", "polars"], "weight": 1.3, "level_threshold": 3 },
-        "Computer Vision": { "aliases": ["opencv", "yolo", "image-processing"], "weight": 1.4, "level_threshold": 4 }
+        "Data Engineering": { "aliases": ["spark", "airflow", "kafka", "pandas", "numpy", "polars", "scipy"], "weight": 1.3, "level_threshold": 3 },
+        "Computer Vision": { "aliases": ["opencv", "yolo", "image-processing", "torchvision"], "weight": 1.4, "level_threshold": 4 }
       }
     },
     "Architecture & Core": {
@@ -71,8 +71,8 @@
       "skills": {
         "System Design": { "aliases": ["distributed-systems", "scalability", "high-availability"], "weight": 1.5, "level_threshold": 4 },
         "Graph Algorithms": { "aliases": ["networkx", "graph-theory", "pagerank", "centrality"], "weight": 1.4, "level_threshold": 3 },
-        "Unit Testing": { "aliases": ["jest", "pytest", "junit", "tdd", "cypress"], "weight": 0.9, "level_threshold": 2 },
-        "Security": { "aliases": ["oauth2", "jwt", "owasp", "cryptography", "ssl"], "weight": 1.3, "level_threshold": 3 },
+        "Unit Testing": { "aliases": ["jest", "pytest", "junit", "tdd", "cypress", "supertest"], "weight": 0.9, "level_threshold": 2 },
+        "Security": { "aliases": ["oauth2", "jwt", "owasp", "cryptography", "ssl", "jsonwebtoken", "bcryptjs", "helmet"], "weight": 1.3, "level_threshold": 3 },
         "Git": { "aliases": ["git-flow", "version-control", "branching"], "weight": 0.7, "level_threshold": 1 }
       }
     }

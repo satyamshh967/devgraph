@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GitHubNavbar from './components/GitHubNavbar';
-import GitHubSubNav from './components/GitHubSubNav';
-import GitHubProfileSidebar from './components/GitHubProfileSidebar';
-import GitHubOverviewTab from './components/GitHubOverviewTab';
-import GitHubRepositoriesTab from './components/GitHubRepositoriesTab';
+import Navbar from './components/Navbar';
 import KnowledgeGraph from './components/KnowledgeGraph';
 import NodeDetailDrawer from './components/NodeDetailDrawer';
 import SkillEvolutionTimeline from './components/SkillEvolutionTimeline';
@@ -14,7 +10,7 @@ import GitHubImportModal from './components/GitHubImportModal';
 import { GraphAPI } from './services/api';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'graph', 'repositories', 'timeline', 'compatibility', 'complexity', 'analytics'
+  const [activeTab, setActiveTab] = useState('graph');
   const [developers, setDevelopers] = useState([]);
   const [selectedDevId, setSelectedDevId] = useState('');
   const [graphData, setGraphData] = useState({ nodes: [], edges: [] });
@@ -42,7 +38,7 @@ export default function App() {
       setGraphStatus(statusRes);
       setBenchmarks(benchRes);
 
-      // Prefer satyamshh967 if present, else first developer
+      // Default to satyamshh967 if present, else first developer
       const satyam = devsRes.find(d => d.username === 'satyamshh967');
       const defaultId = satyam ? satyam.id : (devsRes[0]?.id || '');
       setSelectedDevId(defaultId);
@@ -84,61 +80,23 @@ export default function App() {
     }
   };
 
-  const currentDev = developers.find(d => d.id === selectedDevId) || developers[0];
-
   return (
-    <div className="min-h-screen bg-[#0d1117] text-[#c9d1d9] flex flex-col font-sans select-none antialiased">
-      {/* GitHub Top Global Navigation Bar */}
-      <GitHubNavbar
-        currentDev={currentDev}
+    <div className="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+      {/* Top Navigation Bar */}
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
         developers={developers}
+        selectedDevId={selectedDevId}
         onSelectDeveloper={handleSelectDeveloper}
         onOpenImport={() => setIsImportOpen(true)}
         graphStatus={graphStatus}
       />
 
-      {/* GitHub Sub-Navigation Tabs */}
-      <GitHubSubNav
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        reposCount={currentDev?.repositories?.length || currentDev?.reposCount || 0}
-        skillsCount={graphData?.stats?.skillsCount || null}
-      />
-
       {/* Main Content Area */}
-      <main className="flex-1 relative">
-        {/* Profile Tabs: Overview and Repositories use GitHub 2-column profile layout */}
-        {(activeTab === 'overview' || activeTab === 'repositories') && (
-          <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row gap-8">
-            {/* Left Column: Authentic GitHub Profile Sidebar */}
-            <GitHubProfileSidebar
-              currentDev={currentDev}
-              onOpenImport={() => setIsImportOpen(true)}
-              onSelectTab={setActiveTab}
-            />
-
-            {/* Right Column: Tab View (Overview or Repositories) */}
-            <div className="flex-1 min-w-0">
-              {activeTab === 'overview' && (
-                <GitHubOverviewTab
-                  currentDev={currentDev}
-                  onSelectTab={setActiveTab}
-                  graphData={graphData}
-                />
-              )}
-
-              {activeTab === 'repositories' && (
-                <GitHubRepositoriesTab
-                  currentDev={currentDev}
-                />
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Full Screen Knowledge Graph */}
+      <main className="flex-1 relative overflow-hidden">
         {activeTab === 'graph' && (
-          <div className="relative w-full h-[calc(100vh-8rem)]">
+          <>
             <KnowledgeGraph
               graphData={graphData}
               onSelectNode={handleSelectNode}
@@ -152,10 +110,9 @@ export default function App() {
               onClose={() => setSelectedNodeId(null)}
               onSelectConnectedNode={(id) => setSelectedNodeId(id)}
             />
-          </div>
+          </>
         )}
 
-        {/* Skill Evolution Timeline */}
         {activeTab === 'timeline' && (
           <SkillEvolutionTimeline
             selectedDevId={selectedDevId}
@@ -163,7 +120,6 @@ export default function App() {
           />
         )}
 
-        {/* Team Compatibility Scoring */}
         {activeTab === 'compatibility' && (
           <TeamCompatibilityModal
             selectedDevId={selectedDevId}
@@ -171,14 +127,12 @@ export default function App() {
           />
         )}
 
-        {/* Repository Complexity */}
         {activeTab === 'complexity' && (
           <RepoComplexityView
             selectedDevId={selectedDevId}
           />
         )}
 
-        {/* Contribution Analytics */}
         {activeTab === 'analytics' && (
           <ContributionAnalyticsView
             selectedDevId={selectedDevId}
@@ -187,7 +141,7 @@ export default function App() {
         )}
       </main>
 
-      {/* GitHub Import / Connect Account Modal */}
+      {/* GitHub Importer & Benchmark Switcher Modal */}
       <GitHubImportModal
         isOpen={isImportOpen}
         onClose={() => setIsImportOpen(false)}

@@ -8,8 +8,9 @@ import {
   CheckCircle2, 
   AlertCircle,
   ArrowRight,
-  HelpCircle,
-  ExternalLink
+  ExternalLink,
+  ShieldCheck,
+  Cpu
 } from 'lucide-react';
 import { GraphAPI } from '../services/api';
 
@@ -35,16 +36,20 @@ export default function GitHubImportModal({ isOpen, onClose, onImportSuccess, be
 
     setStatusStep(`Connecting to GitHub API for @${userToImport}...`);
     setTimeout(() => {
-      setStatusStep('Harvesting repositories, languages, and README manifests...');
-    }, 700);
+      setStatusStep('Inspecting repositories, language breakdowns, and README manifests...');
+    }, 600);
 
     setTimeout(() => {
-      setStatusStep('Executing Python NLP skill extraction & taxonomy matching...');
-    }, 1400);
+      setStatusStep('Scanning package.json, requirements.txt, and build configs...');
+    }, 1200);
 
     setTimeout(() => {
-      setStatusStep('Computing cyclomatic complexity & building knowledge graph...');
-    }, 2100);
+      setStatusStep('Running Python NLP skill extraction & taxonomy ontology...');
+    }, 1800);
+
+    setTimeout(() => {
+      setStatusStep('Computing cyclomatic complexity & constructing Knowledge Graph...');
+    }, 2400);
 
     try {
       const res = await GraphAPI.importProfile(userToImport, token.trim() || null);
@@ -66,68 +71,72 @@ export default function GitHubImportModal({ isOpen, onClose, onImportSuccess, be
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-[#161b22] border border-[#30363d] rounded-xl w-full max-w-lg shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+      <div className="bg-[#111827] border border-slate-800 rounded-3xl w-full max-w-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         
         {/* Header */}
-        <div className="p-4 px-6 border-b border-[#21262d] flex items-center justify-between bg-[#0d1117]">
-          <div className="flex items-center space-x-2.5">
-            <svg height="24" viewBox="0 0 16 16" version="1.1" width="24" fill="#f0f6fc">
-              <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
-            </svg>
+        <div className="p-6 border-b border-slate-800 flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-0.5 shadow-lg shadow-indigo-500/20">
+              <div className="w-full h-full bg-[#0b0f19] rounded-[10px] flex items-center justify-center">
+                <DownloadCloud className="w-5 h-5 text-indigo-400" />
+              </div>
+            </div>
             <div>
-              <h2 className="text-sm font-bold text-[#f0f6fc]">Connect with GitHub</h2>
-              <p className="text-[11px] text-[#8b949e]">Ingest your profile, repositories, & skills</p>
+              <h2 className="text-base font-bold text-white">Connect GitHub & Ingest Repositories</h2>
+              <p className="text-xs text-slate-400">Deep-scan code, manifests, and construct live Knowledge Graph</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded text-[#8b949e] hover:text-[#f0f6fc] hover:bg-[#21262d]"
+            className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Tab selection */}
-        <div className="flex border-b border-[#21262d] bg-[#0d1117] px-6 text-xs">
+        {/* Tab Selection */}
+        <div className="px-6 pt-3 flex space-x-2 border-b border-slate-800/80">
           <button
             onClick={() => setActiveTab('connect')}
-            className={`py-2.5 px-3 font-semibold border-b-2 transition-all ${
-              activeTab === 'connect' 
-                ? 'border-[#f78166] text-[#f0f6fc]' 
-                : 'border-transparent text-[#8b949e] hover:text-[#f0f6fc]'
+            className={`pb-3 text-xs font-semibold px-2 transition-colors relative ${
+              activeTab === 'connect' ? 'text-indigo-400' : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            Connect GitHub Account
+            Live GitHub Profile
+            {activeTab === 'connect' && (
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500"></span>
+            )}
           </button>
           <button
             onClick={() => setActiveTab('benchmarks')}
-            className={`py-2.5 px-3 font-semibold border-b-2 transition-all ${
-              activeTab === 'benchmarks' 
-                ? 'border-[#f78166] text-[#f0f6fc]' 
-                : 'border-transparent text-[#8b949e] hover:text-[#f0f6fc]'
+            className={`pb-3 text-xs font-semibold px-2 transition-colors relative ${
+              activeTab === 'benchmarks' ? 'text-indigo-400' : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            Benchmark Developer Personas
+            Benchmark Developer Profiles
+            {activeTab === 'benchmarks' && (
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500"></span>
+            )}
           </button>
         </div>
 
         {/* Modal Body */}
         <div className="p-6 space-y-4">
           {error && (
-            <div className="p-3 bg-[#f85149]/15 border border-[#f85149]/40 rounded-md text-[#f85149] text-xs flex items-center space-x-2">
+            <div className="p-3 bg-rose-500/15 border border-rose-500/30 rounded-xl text-rose-300 text-xs flex items-center space-x-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {statusStep && (
-            <div className="p-3.5 bg-[#1f2937]/70 border border-[#388bfd]/40 rounded-md space-y-1.5">
-              <div className="flex items-center space-x-2 text-[#58a6ff] text-xs font-semibold">
-                <Sparkles className="w-3.5 h-3.5 animate-spin" />
-                <span>Knowledge Graph Ingestion Pipeline</span>
+            <div className="p-4 bg-indigo-500/10 border border-indigo-500/30 rounded-2xl space-y-2">
+              <div className="flex items-center space-x-2 text-indigo-400 text-xs font-semibold">
+                <Sparkles className="w-4 h-4 animate-spin" />
+                <span>Deep Ingestion & Graph Construction</span>
               </div>
-              <p className="text-xs text-[#c9d1d9] font-mono pl-5">{statusStep}</p>
+              <p className="text-xs text-slate-300 font-mono pl-6">{statusStep}</p>
             </div>
           )}
 
@@ -135,18 +144,19 @@ export default function GitHubImportModal({ isOpen, onClose, onImportSuccess, be
             <div className="space-y-4">
               {/* Username Input */}
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#f0f6fc] block">
-                  GitHub Username <span className="text-[#f85149]">*</span>
+                <label className="text-xs font-semibold text-slate-200 block">
+                  GitHub Username <span className="text-indigo-400">*</span>
                 </label>
-                <div className="flex items-center bg-[#0d1117] border border-[#30363d] focus-within:border-[#58a6ff] rounded-md px-3 py-1.5">
-                  <span className="text-xs text-[#8b949e] mr-1 select-none">github.com/</span>
+                <div className="flex items-center bg-slate-900 border border-slate-800 focus-within:border-indigo-500 rounded-xl px-3.5 py-2.5 shadow-inner">
+                  <Github className="w-4 h-4 text-slate-400 mr-2.5 shrink-0" />
+                  <span className="text-xs text-slate-500 select-none mr-1">github.com/</span>
                   <input
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="e.g. satyamshh967"
                     disabled={loading}
-                    className="bg-transparent text-xs text-[#f0f6fc] placeholder-[#8b949e] focus:outline-none w-full"
+                    className="bg-transparent text-xs text-white placeholder-slate-500 focus:outline-none w-full"
                   />
                 </div>
               </div>
@@ -154,67 +164,67 @@ export default function GitHubImportModal({ isOpen, onClose, onImportSuccess, be
               {/* Optional Token Input */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-semibold text-[#f0f6fc] flex items-center space-x-1">
-                    <KeyRound className="w-3.5 h-3.5 text-[#8b949e]" />
+                  <label className="text-xs font-semibold text-slate-200 flex items-center space-x-1.5">
+                    <KeyRound className="w-3.5 h-3.5 text-slate-400" />
                     <span>Personal Access Token</span>
-                    <span className="text-[10px] text-[#8b949e] font-normal">(Optional)</span>
+                    <span className="text-[10px] text-slate-500 font-normal">(Optional)</span>
                   </label>
                   <a
                     href="https://github.com/settings/tokens"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[10px] text-[#58a6ff] hover:underline flex items-center space-x-1"
+                    className="text-[11px] text-indigo-400 hover:underline flex items-center space-x-1"
                   >
                     <span>Generate token</span>
-                    <ExternalLink className="w-2.5 h-2.5" />
+                    <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
                 <input
                   type="password"
                   value={token}
                   onChange={(e) => setToken(e.target.value)}
-                  placeholder="ghp_... (avoids API rate limits)"
+                  placeholder="ghp_... (removes rate limits & allows private repos)"
                   disabled={loading}
-                  className="w-full bg-[#0d1117] border border-[#30363d] focus:border-[#58a6ff] rounded-md px-3 py-1.5 text-xs text-[#f0f6fc] placeholder-[#8b949e] focus:outline-none font-mono"
+                  className="w-full bg-slate-900 border border-slate-800 focus:border-indigo-500 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none font-mono"
                 />
-                <p className="text-[11px] text-[#8b949e]">
-                  Public accounts work without a token. Providing a token lifts GitHub's rate limits and enables private repo scanning.
+                <p className="text-[11px] text-slate-400">
+                  Public accounts import automatically. A token grants higher rate limits (5,000 req/hr) and manifest scanning across all repos.
                 </p>
               </div>
 
-              {/* Submit Button */}
+              {/* Action Button */}
               <button
                 disabled={loading || !username.trim()}
                 onClick={() => handleImport()}
-                className="w-full py-2 px-4 rounded-md bg-[#238636] hover:bg-[#2ea043] disabled:opacity-50 text-white text-xs font-bold shadow-sm transition-all flex items-center justify-center space-x-2"
+                className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 disabled:opacity-50 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center space-x-2"
               >
-                <span>{loading ? 'Ingesting Repositories & Building Graph...' : 'Sync GitHub & Build Knowledge Graph'}</span>
+                <span>{loading ? 'Processing GitHub Deep Scan...' : 'Import Profile & Build Knowledge Graph'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           ) : (
             <div className="space-y-3">
-              <p className="text-xs text-[#8b949e]">
-                Or select an instant pre-analyzed benchmark developer profile:
+              <p className="text-xs text-slate-400">
+                Or select a pre-configured benchmark profile for immediate graph analytics:
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {benchmarks.map(b => (
                   <button
                     key={b.id}
                     disabled={loading}
                     onClick={() => handleImport(b.username)}
-                    className="p-2.5 bg-[#0d1117] hover:bg-[#21262d] border border-[#30363d] hover:border-[#58a6ff] rounded-md flex items-center space-x-3 text-left transition-colors"
+                    className="p-3 bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-indigo-500/50 rounded-2xl flex items-center space-x-3 text-left transition-colors group"
                   >
                     <img
                       src={b.avatar}
                       alt={b.name}
-                      className="w-9 h-9 rounded-full object-cover border border-[#30363d]"
+                      className="w-10 h-10 rounded-full object-cover border border-slate-700 group-hover:border-indigo-500 shrink-0"
                     />
                     <div className="truncate">
-                      <span className="text-xs font-bold text-[#f0f6fc] block truncate">
+                      <span className="text-xs font-bold text-white block group-hover:text-indigo-300 truncate">
                         {b.name}
                       </span>
-                      <span className="text-[10px] text-[#8b949e] block truncate">
+                      <span className="text-[10px] text-indigo-400 block truncate">
                         {b.primaryCategory}
                       </span>
                     </div>
