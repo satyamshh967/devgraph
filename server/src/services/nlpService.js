@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const NLP_BASE_URL = process.env.NLP_SERVICE_URL || 'http://127.0.0.1:8000';
+const NLP_BASE_URL = process.env.NLP_SERVICE_URL || 'http://127.0.0.1:8001';
 
 export class NlpService {
   /**
